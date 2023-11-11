@@ -169,18 +169,18 @@ body {
 </head>
 <body>
     <input id="password" placeholder="パスワード">
-    <input type="number" id="selectCount" placeholder="オプションの作成">
+    <input type="number" id="selectCount" placeholder="セレクトの作成">
     <button id="addSelectButton">セレクトを作成</button>
     <div id="selectContainer"></div>
     <input type="number" id="redirectInterval" placeholder="共有の間隔（ミリ秒）">
     <button id="startRedirectButton">半自動共有開始</button>
-    <button id="stopRedirectButton">共有停止</button>
+    <button id="stopRedirectButton"> 　共有停止　 </button>
 
     <script>
         let redirectTimer;
         const selectContainer = document.getElementById("selectContainer");
 
-        const passwords = ["NameTool001", ""]; // 複数のパスワードを配列で管理
+        const passwords = ["NameTool001", "CalenskJQQgjm3"]; // 複数のパスワードを配列で管理
 
         document.getElementById("addSelectButton").addEventListener("click", function() {
             const selectCount = parseInt(document.getElementById("selectCount").value);
