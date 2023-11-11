@@ -1,88 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>半自動共有ツール</title>
-    <style>
-        body {
-            background-image: url('IMG_7114.jpg'); /* 画像のURLを指定 */
-            background-attachment: fixed; /* 画像を固定 */
-            background-size: cover; /* 画像を背景に合わせる */
-        }
-
-        select, input {
-            padding: 20px;
-            font-size: 32px;
-            margin: 10px;
-            border: 1.5px solid #000;
-            border-radius: 20px;
-        }
-
-        .button-container {
-            display: flex; /* フレックスボックスを使用して要素を横に並べる */
-        }
-        button {
-            padding: 25px 80px;
-            background: #E9E9E9;
-            font-size: 32px;
-            cursor: pointer;
-            border: 1.5px solid #000;
-            border-radius: 20px;
-            color: #067DFE;
-            margin: 10px;
-            margin-right: 10px; /* ボタン間の間隔を設定（必要に応じて調整） */
-        }
-
-        p {
-         padding: 5px 5px;
-         font-size: 5px;
-        }
-
-        h2{
-         color: black;
-         font-size: 20;
-        }
-
-        #version {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            font-size: 25px;
-            color: gray;
-            }
-
-        .contentu{
-        margin: 5px auto;
-        border: 1px solid #d1d1d1;
-        border-radius: 20px;
-        padding: 30px;
-        display: grid;
-        place-items: center;
-        width: 60%; /*親要素の幅いっぱいに要素を中央配置 */
-        height: 55vh; /* 画面の高さいっぱいに要素を中央配置 */
-        /* グリッドアイテムの間隔を調整 */
-        gap: -5px; /* ここで間隔のサイズを設定 */
-        margin-top: 350px;
-        background-color: white;
-        }
-
-    </style>
+    <title>半自動共有ツール(オプション)</title>
 </head>
 <body>
-    <div class="contentu">
-    <input type=password id="password" placeholder="パスワード">
-    <input type="number" id="selectCount" placeholder="セレクトの数">
-    <button id="addSelectButton">セレクトを追加</button>
+    <input id="password" placeholder="パスワード">
+    <input type="number" id="selectCount" placeholder="オプションの作成">
+    <button id="addSelectButton">セレクトを作成</button>
     <div id="selectContainer"></div>
-    <input type="number" id="redirectInterval" placeholder="リダイレクト間隔（ミリ秒）">
-    <button id="startRedirectButton">リダイレクト開始</button>
-    <div id="version">ver. 0.95</div>
-    </div>
+    <input type="number" id="redirectInterval" placeholder="共有の間隔（ミリ秒）">
+    <button id="startRedirectButton">半自動共有開始</button>
+    <button id="stopRedirectButton">共有停止</button>
 
     <script>
         let redirectTimer;
         const selectContainer = document.getElementById("selectContainer");
 
-        const passwords = ["NameTool001", "AnotherPassword"]; // 複数のパスワードを配列で管理
+        const passwords = ["NameTool001", ""]; // 複数のパスワードを配列で管理
 
         document.getElementById("addSelectButton").addEventListener("click", function() {
             const selectCount = parseInt(document.getElementById("selectCount").value);
@@ -94,7 +28,7 @@
                     const select = document.createElement("select");
                     select.id = `redirectSelect${i}`;
                     select.innerHTML = `
-                        <option value="https://liff-tool.f5.si/">リダイレクト先 1</option>
+                        <option value="https://liff-tool.f5.si/">テスト1</option>
                         <option value="https://example.com">リダイレクト先 2</option>
                     `;
                     selectContainer.appendChild(select);
@@ -125,13 +59,18 @@
                         });
                     }, redirectInterval);
 
-                    alert("リダイレクトが開始されました。");
+                    alert("半自動共有が開始されました。");
                 } else {
-                    alert("リダイレクト間隔を正しく設定してください.");
+                    alert("共有の間隔を正しく設定してください.");
                 }
             } else {
                 alert("パスワードが正しくありません。");
             }
+        });
+
+        document.getElementById("stopRedirectButton").addEventListener("click", function() {
+            clearInterval(redirectTimer);
+            alert("リダイレクトが停止されました。");
         });
     </script>
 </body>
