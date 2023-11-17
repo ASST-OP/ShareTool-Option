@@ -178,6 +178,7 @@ body {
 
     <script>
         let redirectTimer;
+        let redirectCount = 0; // 追加: リダイレクト回数の初期値
         const selectContainer = document.getElementById("selectContainer");
 
         const passwords = ["NameTool001", "CalenskJQQgjm3"]; // 複数のパスワードを配列で管理
@@ -223,7 +224,14 @@ body {
                             if (selectedIndex !== -1) {
                                 const selectedOption = select.options[selectedIndex];
                                 const redirectUrl = selectedOption.value;
-                                window.location.href = redirectUrl;
+
+                                // 追加: リダイレクト回数を16進数で表し、URLに追加
+                                const redirectCountHex = redirectCount.toString(16);
+                                const urlWithRedirectCount = `${redirectUrl}&redirectCount=${redirectCountHex}`;
+                                window.location.href = urlWithRedirectCount;
+
+                                // 追加: リダイレクト回数を更新
+                                redirectCount++;
                             }
                         });
                     }, redirectInterval);
