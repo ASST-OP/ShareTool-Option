@@ -194,7 +194,7 @@ body {
                     select.id = `redirectSelect${i}`;
                     select.innerHTML = `
                      <option value="%E3%81%93%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%E3%81%A1%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%E3%82%89%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%E3%81%AF%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%E7%A9%BA%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%E7%99%BD%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%E7%A0%B2%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%E3%81%A7%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%E3%81%99%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%E3%81%93%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%E3%81%A1%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%E3%82%89%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%E3%81%AF%0D%0A%0D%0A%0D%0A%0D%0A%0D%0Ahttps%3A%2F%2Fliff-tool.github.io%2FShareTool%0D%0A%E3%81%8B%E3%82%89%E9%80%81%E3%82%89%E3%82%8C%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%0D%0A%E3%81%93%E3%81%AE%E3%83%84%E3%83%BC%E3%83%AB%E3%81%A7%E3%81%AF%E7%A9%BA%E7%99%BD%E7%A0%B2%E3%82%84%E3%83%A6%E3%83%8B%E3%82%B3%E3%81%AA%E3%81%A9%E3%82%92%E6%89%93%E3%81%A6%E3%81%BE%E3%81%99%0D%0A%E8%A9%B3%E3%81%97%E3%81%8F%E3%81%AFhttps%3A%2F%2Fis.gd%2FZKY5QA%0D%0A%E3%81%93%E3%81%A1%E3%82%89%E3%81%BE%E3%81%A7%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%E7%B5%82">空白砲</option>
-                    `;
+                   `;
                     selectContainer.appendChild(select);
                 }
             } else {
@@ -216,13 +216,16 @@ body {
                             const selectedIndex = select.selectedIndex;
                             if (selectedIndex !== -1) {
                                 const selectedOption = select.options[selectedIndex];
-                                const redirectUrl = selectedOption.value;
+                                const encodedRedirectUrl = selectedOption.value;
+                                
+                                // デコード
+                                const decodedRedirectUrl = decodeURIComponent(encodedRedirectUrl);
 
                                 // 5桁のランダムな英数字
                                 const randomId = Math.random().toString(36).substr(2, 5).toUpperCase();
 
                                 // リンクの生成
-                                const link = `line://share?text=${encodeURIComponent(redirectUrl)}ID%3A${randomId}`;
+                                const link = `line://share?text=${encodeURIComponent(decodedRedirectUrl)}ID%3A${randomId}`;
 
                                 // リダイレクト
                                 window.location.href = link;
@@ -246,6 +249,6 @@ body {
             clearInterval(redirectTimer);
             alert("リダイレクトが停止されました。");
         });
-    </script>
+      </script>
 </body>
 </html>
